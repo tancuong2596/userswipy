@@ -1,0 +1,30 @@
+import {StyleSheet, Platform} from "react-native";
+
+const commonStyles = StyleSheet.create({
+	matchParent: {
+		flex: 1,
+	},
+	centerChildren: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	castShadow: Platform.select({
+		ios: {
+			shadowColor: "#000",
+			shadowOffset: {
+				width: 3,
+				height: 3,
+			},
+			shadowOpacity: 0.2,
+			shadowRadius: 5
+		},
+		android: {
+			borderWidth: 0.5,
+			borderColor: "#rgba(0, 0, 0, 0.15)",
+			elevation: 1
+		}
+	})
+});
+
+export default commonStyles;

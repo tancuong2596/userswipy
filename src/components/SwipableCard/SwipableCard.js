@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const MARGIN_WIDTH = 170;
+const MARGIN_WIDTH = SCREEN_WIDTH / 4;
 
-class SwipableCards extends Component {
+class SwipableCard extends Component {
 	static propTypes = {
 		onSwipeLeft: PropTypes.func,
 		onSwipeRight: PropTypes.func,
@@ -53,6 +53,16 @@ class SwipableCards extends Component {
 		});
 	};
 
+	onPanResponderRelease = (evt, gestureState) => {
+		const {onLeftMargin, onRightMargin} = this.state;
+
+		if (onLeftMargin || onRightMargin) {
+			this.removeCurrentCard();
+		} else {
+			this.flyBackToOriginalPosition();
+		}
+	};
+
 	onCardDisappear = () => {
 		const {onLeftMargin, onRightMargin} = this.state;
 		const {onSwipeLeft, onSwipeRight} = this.props;
@@ -66,7 +76,6 @@ class SwipableCards extends Component {
 
 	removeCurrentCard = () => {
 		const {onLeftMargin} = this.state;
-		const {onSwipeRight, onSwipeLeft} = this.props;
 
 		Animated.parallel([
 			Animated.timing(this.state.deltaX, {
@@ -79,9 +88,7 @@ class SwipableCards extends Component {
 			}),
 		], {
 			useNativeDriver: true
-		}).start(
-			onLeftMargin ? onSwipeLeft : onSwipeRight
-		);
+		}).start(this.onCardDisappear);
 	};
 
 	flyBackToOriginalPosition = () => {
@@ -93,22 +100,12 @@ class SwipableCards extends Component {
 		}).start();
 	};
 
-	onPanResponderRelease = (evt, gestureState) => {
-		const {onLeftMargin, onRightMargin} = this.state;
-
-		if (onLeftMargin || onRightMargin) {
-			this.removeCurrentCard();
-		} else {
-			this.flyBackToOriginalPosition();
-		}
-	};
-
 	render() {
 		const {styles: customStyles = {}} = this.props;
 
 		const rotateCard = this.state.deltaX.interpolate({
 			inputRange: [-200, 0, 200],
-			outputRange: ['-20deg', '0deg', '20deg'],
+			outputRange: ["-20deg", "0deg", "20deg"],
 		});
 
 		const animatedViewStyles = [
@@ -134,4 +131,4 @@ class SwipableCards extends Component {
 	}
 }
 
-export default SwipableCards;
+export default SwipableCard;

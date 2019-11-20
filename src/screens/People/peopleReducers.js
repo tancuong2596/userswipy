@@ -8,6 +8,21 @@ const initialState = {
 	}
 };
 
+const getPersonId = (person = {id: {}}) => {
+	return person.id.name + person.id.value;
+};
+
+const combinePeopleData  = (newData = [], oldData = []) => {
+	const existingIds = new Set(
+		oldData.map(getPersonId)
+	);
+
+	return [
+		...oldData,
+		...newData.filter(person => !existingIds.has(getPersonId(person)))
+	];
+};
+
 const peopleReducers = (state = initialState, {type, payload} = {}) => {
 	switch (type) {
 		case toRequest(peopleActionTypes.FETCH_RANDOM_PEOPLE):
@@ -23,10 +38,7 @@ const peopleReducers = (state = initialState, {type, payload} = {}) => {
 				...state,
 				people: {
 					fetching: false,
-					data: [
-						...state.people.data,
-						...(payload.results || []),
-					]
+					data: combinePeopleData(payload.results, state.people.data)
 				}
 			};
 		case toFailure(peopleActionTypes.FETCH_RANDOM_PEOPLE):

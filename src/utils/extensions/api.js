@@ -11,7 +11,7 @@ const validateResponseAndConvertToJSON = async (response) => {
 
 	const jsonResponse = await response.json();
 
-	if (jsonResponse.error) {
+	if (typeof jsonResponse.error !== "undefined") {
 		throw new Error(jsonResponse.error);
 	}
 
