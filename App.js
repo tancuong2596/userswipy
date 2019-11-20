@@ -11,19 +11,14 @@ import {Provider} from "react-redux";
 import {View, Text} from "react-native";
 
 import People from "src/screens/People/People";
-import store from "src/redux/store";
+import store from "userswipy/src/redux/store";
 
 const App: () => React$Node = () => {
-/*	return (
+	return (
 		<Provider store={store}>
 			<People/>
 		</Provider>
-	); */
-return (
-	<View>
-		<Text>ABC</Text>
-	</View>
-)
+	);
 };
 
 export default App;
