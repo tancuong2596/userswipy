@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {View, Text} from "react-native";
 
 import {fetchRandomPeople} from "src/screens/People/peopleActions";
+import SwipableCards from 'src/components/SwipableCards/SwipableCards';
 
 class People extends Component {
 	componentDidMount() {
@@ -13,10 +14,10 @@ class People extends Component {
 
 	render() {
 		return (
-			<View>
-				<Text>
-					People Screen
-				</Text>
+			<View style={{
+				flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center"
+			}}>
+				<SwipableCards/>
 			</View>
 		);
 	}
