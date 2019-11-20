@@ -5,7 +5,6 @@ const commonStyles = StyleSheet.create({
 		flex: 1,
 	},
 	centerChildren: {
-		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center"
 	},

@@ -8,6 +8,7 @@ import commonStyles from "src/styles/commonStyles";
 import {fetchRandomPeople} from "src/screens/People/peopleActions";
 import SwipableCard from "src/components/SwipableCard/SwipableCard";
 import Avatar from "src/screens/People/components/Avatar/Avatar";
+import {constructFullName} from "src/utils/extensions/strings";
 
 class People extends Component {
 	static propTypes = {
@@ -39,7 +40,8 @@ class People extends Component {
 		const {people} = this.props;
 		const {matchParent, centerChildren} = commonStyles;
 		const {
-			picture = {}
+			picture = {},
+			name = {first: "", last: ""}
 		} = people[currentPersonIndex] || {};
 
 		return (
@@ -49,7 +51,12 @@ class People extends Component {
 						<Avatar imageUrl={picture.large}/>
 					</View>
 					<View style={styles.lowerCard}>
-
+						<Text style={styles.greetingLabel}>
+							Hi, My name is
+						</Text>
+						<Text style={styles.personNameLabel}>
+							{constructFullName(name)}
+						</Text>
 					</View>
 				</SwipableCard>
 			</View>

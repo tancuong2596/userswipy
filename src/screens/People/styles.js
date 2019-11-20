@@ -29,10 +29,22 @@ const styles = StyleSheet.create({
 		paddingTop: 20
 	},
 	lowerCard: {
+		flexDirection: "column",
 		width: "100%",
 		height: 260,
 		backgroundColor: "#fff",
+		...commonStyles.centerChildren
 	},
+	greetingLabel: {
+		fontSize: 18,
+		color: "#999"
+	},
+	personNameLabel: {
+		color: "#2c2e31",
+		fontSize: 34,
+		margin: 5,
+		textTransform: "capitalize",
+	}
 });
 
 export default styles;
