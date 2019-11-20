@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {Animated, PanResponder, Dimensions, Easing} from 'react-native';
-import PropTypes from 'prop-types';
+import React, {Component} from "react";
+import {Animated, PanResponder, Dimensions, Easing} from "react-native";
+import PropTypes from "prop-types";
 
-import styles from './styles';
+import styles from "./styles";
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const MARGIN_WIDTH = SCREEN_WIDTH / 4;
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const MARGIN_WIDTH = SCREEN_WIDTH / 2;
 
 class SwipableCard extends Component {
 	static propTypes = {

@@ -1,10 +1,13 @@
 import {Dimensions, StyleSheet} from "react-native";
 
-import commonStyles from 'src/styles/commonStyles';
+import commonStyles from "src/styles/commonStyles";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
+	people: {
+		backgroundColor: "#2c2e31"
+	},
 	card: {
 		flexDirection: "column",
 		width: Math.min(SCREEN_WIDTH * 0.8, 350),
@@ -22,20 +25,14 @@ const styles = StyleSheet.create({
 		borderColor: "#rgba(0, 0, 0, 0.15)",
 		overflow: "visible",
 		alignItems: "center",
-		zIndex: 1000
+		zIndex: 1000,
+		paddingTop: 20
 	},
 	lowerCard: {
 		width: "100%",
 		height: 260,
 		backgroundColor: "#fff",
 	},
-	avatar: {
-		width: 162,
-		height: 162,
-		borderRadius: 162 / 2,
-		backgroundColor: "red",
-		marginTop: 20,
-	}
 });
 
 export default styles;

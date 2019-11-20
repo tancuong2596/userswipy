@@ -1,5 +1,5 @@
-import {toFailure, toRequest, toSuccess} from 'src/utils/extensions/api';
-import peopleActionTypes from 'src/redux/actionTypes/peopleActionTypes';
+import {toFailure, toRequest, toSuccess} from "src/utils/extensions/api";
+import peopleActionTypes from "src/redux/actionTypes/peopleActionTypes";
 
 const initialState = {
 	people: {
