@@ -1,11 +1,11 @@
-const fetchRandomPeople = () => async dispatch => {
-	try {
-		const response = await fetch("https://randomuser.me/api");
-		console.log(response);
-	} catch (e) {
+import {} from "src/utils/extensions/api";
+import peopleActionTypes from "src/redux/actionTypes/peopleActionTypes";
+import {createAsyncAction} from 'src/utils/extensions/api';
 
-	}
-};
+const fetchRandomPeople = () => createAsyncAction({
+	type: peopleActionTypes.FETCH_RANDOM_PEOPLE,
+	payload: {}
+});
 
 export {
 	fetchRandomPeople

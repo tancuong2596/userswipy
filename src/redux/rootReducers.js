@@ -1,4 +1,3 @@
-import thunk from "redux-thunk";
 import {persistStore} from "redux-persist";
 import {combineReducers} from "redux";
 
