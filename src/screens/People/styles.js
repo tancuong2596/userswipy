@@ -1,4 +1,5 @@
 import {Dimensions, StyleSheet} from "react-native";
+import commonStyles from "src/styles/commonStyles";
 
 const styles = StyleSheet.create({
 	people: {

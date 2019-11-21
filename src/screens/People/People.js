@@ -1,15 +1,24 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {View} from "react-native";
+import {View, Image, Text, TouchableOpacity} from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./styles";
 import commonStyles from "src/styles/commonStyles";
 import {addPersonToFavorite, fetchRandomPeople, markPersonAsShown} from "src/screens/People/peopleActions";
 import Deck from "src/screens/People/components/Deck/Deck";
-import {getPersonId} from "src/utils/misc";
+import person from "src/assets/icons/person.png";
+import personSelected from "src/assets/icons/personSelected.png";
 
 class People extends Component {
+	static navigationOptions = {
+		tabBarIcon: ({focused}) =>
+			 <Image
+				 source={focused ? personSelected : person}
+				 style={{width: 22, height: 25}}
+			 />
+	};
+
 	static propTypes = {
 		people: PropTypes.array,
 		peopleCount: PropTypes.number,
@@ -32,7 +41,7 @@ class People extends Component {
 		super(props);
 
 		this.state = {
-			currentPersonIndex: 0
+			currentPersonIndex: 0,
 		};
 	}
 
@@ -63,11 +72,11 @@ class People extends Component {
 	};
 
 	showNextPerson = () => this.setState({
-		currentPersonIndex: this.state.currentPersonIndex + 1
+		currentPersonIndex: this.state.currentPersonIndex + 1,
 	}, () => {
 		const {
 			peopleCount,
-			fetchRandomPeople
+			fetchRandomPeople,
 		} = this.props;
 
 		if (this.state.currentPersonIndex + 1 >= peopleCount) {
@@ -103,5 +112,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
 	fetchRandomPeople,
 	addPersonToFavorite,
-	markPersonAsShown
+	markPersonAsShown,
 })(People);
