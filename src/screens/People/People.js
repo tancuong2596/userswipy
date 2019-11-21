@@ -7,8 +7,9 @@ import styles from "./styles";
 import commonStyles from "src/styles/commonStyles";
 import {fetchRandomPeople} from "src/screens/People/peopleActions";
 import SwipableCard from "src/components/SwipableCard/SwipableCard";
-import Avatar from "src/screens/People/components/Avatar/Avatar";
+import Avatar from "src/components/Avatar/Avatar";
 import {constructFullName} from "src/utils/extensions/strings";
+import ToolBar from "src/components/ToolBar/ToolBar";
 
 class People extends Component {
 	static propTypes = {
@@ -57,6 +58,7 @@ class People extends Component {
 						<Text style={styles.personNameLabel}>
 							{constructFullName(name)}
 						</Text>
+						<ToolBar/>
 					</View>
 				</SwipableCard>
 			</View>

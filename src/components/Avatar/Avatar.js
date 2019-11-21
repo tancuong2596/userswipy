@@ -1,7 +1,7 @@
 import React from "react";
 import {Image, View} from "react-native";
 
-import styles from "src/screens/People/components/Avatar/styles";
+import styles from "src/components/Avatar/styles";
 import commonStyles from "src/styles/commonStyles";
 
 const Avatar = ({imageUrl = ""} = {}) => {

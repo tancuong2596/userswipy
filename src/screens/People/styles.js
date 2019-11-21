@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 		fontSize: 34,
 		margin: 5,
 		textTransform: "capitalize",
-	}
+	},
 });
 
 export default styles;
