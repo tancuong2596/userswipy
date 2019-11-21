@@ -6,7 +6,9 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		width: "100%",
 		...commonStyles.centerChildren,
-		justifyContent: "space-around"
+		justifyContent: "space-around",
+		position: "absolute",
+		bottom: 24
 	},
 });
 

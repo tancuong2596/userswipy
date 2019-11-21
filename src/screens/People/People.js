@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {View, Text, Image} from "react-native";
+import {View, Text, ToastAndroid, Alert, Platform} from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./styles";
@@ -10,6 +10,7 @@ import SwipableCard from "src/components/SwipableCard/SwipableCard";
 import Avatar from "src/components/Avatar/Avatar";
 import {constructFullName} from "src/utils/extensions/strings";
 import ToolBar from "src/components/ToolBar/ToolBar";
+import showMessage from "src/utils/extensions/showMessage";
 
 class People extends Component {
 	static propTypes = {
@@ -36,6 +37,10 @@ class People extends Component {
 		fetchRandomPeople();
 	}
 
+	toolBarButtonPressed = () => {
+		showMessage("Alert", "Button clicked");
+	};
+
 	render() {
 		const {currentPersonIndex = 0} = this.state;
 		const {people} = this.props;
@@ -47,7 +52,7 @@ class People extends Component {
 
 		return (
 			<View style={[matchParent, centerChildren, styles.people]}>
-				<SwipableCard styles={styles.card}>
+				<SwipableCard styles={styles.card} >
 					<View style={styles.upperCard}>
 						<Avatar imageUrl={picture.large}/>
 					</View>
@@ -58,7 +63,7 @@ class People extends Component {
 						<Text style={styles.personNameLabel}>
 							{constructFullName(name)}
 						</Text>
-						<ToolBar/>
+						<ToolBar onButtonPressed={this.toolBarButtonPressed}/>
 					</View>
 				</SwipableCard>
 			</View>

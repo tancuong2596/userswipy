@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {View, TouchableWithoutFeedback, Image} from "react-native";
+import PropTypes from "prop-types";
 
 import styles from "./styles";
 import person from "src/assets/icons/person.png";
@@ -38,6 +39,15 @@ const buttons = [
 ];
 
 class ToolBar extends Component {
+	static propTypes = {
+		onButtonPressed: PropTypes.func
+	};
+
+	static defaultProps = {
+		onButtonPressed: () => {
+		}
+	};
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -48,7 +58,7 @@ class ToolBar extends Component {
 	toggleButtonAt = (selectedIndex) => {
 		this.setState({
 			isButtonSelected: buttons.map((_, index) => index === selectedIndex)
-		});
+		}, this.props.onButtonPressed);
 	};
 
 	render() {
