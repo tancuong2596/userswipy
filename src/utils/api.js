@@ -1,3 +1,5 @@
+import {convertParamsToString} from "src/utils/strings";
+
 const toRequest = type => `${type}_REQUEST`;
 
 const toSuccess = type => `${type}_SUCCESS`;
@@ -19,6 +21,10 @@ const validateResponseAndConvertToJSON = async (response) => {
 };
 
 const createAsyncAction = ({type, payload = {}, onSuccess, onFailure} = {}) => async dispatch => {
+	const {
+		params = {},
+	} = payload;
+
 	try {
 		dispatch({
 			type: toRequest(type),
@@ -26,7 +32,7 @@ const createAsyncAction = ({type, payload = {}, onSuccess, onFailure} = {}) => a
 		});
 
 		const response = await fetch(
-			"https://randomuser.me/api"
+			`https://randomuser.me/api${convertParamsToString(params)}`
 		);
 
 		const json = await validateResponseAndConvertToJSON(response);

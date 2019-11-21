@@ -1,4 +1,4 @@
-import {toFailure, toRequest, toSuccess} from "src/utils/extensions/api";
+import {toFailure, toRequest, toSuccess} from "src/utils/api";
 import peopleActionTypes from "src/redux/actionTypes/peopleActionTypes";
 
 const initialState = {
@@ -18,8 +18,8 @@ const combinePeopleData  = (newData = [], oldData = []) => {
 	);
 
 	return [
+		...newData.filter(person => !existingIds.has(getPersonId(person))),
 		...oldData,
-		...newData.filter(person => !existingIds.has(getPersonId(person)))
 	];
 };
 

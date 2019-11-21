@@ -1,10 +1,14 @@
-import {} from "src/utils/extensions/api";
+import {} from "src/utils/api";
 import peopleActionTypes from "src/redux/actionTypes/peopleActionTypes";
-import {createAsyncAction} from "src/utils/extensions/api";
+import {createAsyncAction} from "src/utils/api";
 
 const fetchRandomPeople = () => createAsyncAction({
 	type: peopleActionTypes.FETCH_RANDOM_PEOPLE,
-	payload: {}
+	payload: {
+		params: {
+			results: 5
+		}
+	},
 });
 
 export {

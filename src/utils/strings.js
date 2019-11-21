@@ -12,7 +12,19 @@ const constructFullName = (name = {}) => {
       .join(" ");
 };
 
+const convertParamsToString = (params = {}) => {
+    if (Object.keys(params).length === 0) {
+        return "";
+    }
+
+    return "?" + Object
+      .entries(params)
+      .map(param => `${param[0]}=${param[1]}`)
+      .join("&");
+};
+
 export {
+    convertParamsToString,
     constructFullName,
     firstLetterUppercase,
     isEmptyString,

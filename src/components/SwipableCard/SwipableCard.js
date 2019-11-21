@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Animated, PanResponder, Dimensions, Easing} from "react-native";
+import {Animated, Dimensions, PanResponder} from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./styles";
@@ -87,7 +87,7 @@ class SwipableCard extends Component {
 				duration: 200,
 			}),
 		], {
-			useNativeDriver: true
+			useNativeDriver: true,
 		}).start(this.onCardDisappear);
 	};
 
@@ -96,7 +96,7 @@ class SwipableCard extends Component {
 			toValue: 0,
 			duration: 200,
 		}, {
-			useNativeDriver: true
+			useNativeDriver: true,
 		}).start();
 	};
 
@@ -117,7 +117,7 @@ class SwipableCard extends Component {
 					{rotate: rotateCard},
 				],
 			},
-			customStyles
+			customStyles,
 		];
 
 		return (

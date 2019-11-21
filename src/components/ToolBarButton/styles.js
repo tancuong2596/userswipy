@@ -3,12 +3,12 @@ import commonStyles from "src/styles/commonStyles";
 
 const styles = StyleSheet.create({
 	toolBarButton: {
-		height: 45,
-		width: 35,
+		height: 40,
+		width: 30,
 	},
 	toolBarButtonIcon: {
-		height: 45,
-		width: 35,
+		height: 40,
+		width: 30,
 	}
 });
 
