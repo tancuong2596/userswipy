@@ -55,9 +55,7 @@ class People extends Component {
 			fetchRandomPeople
 		} = this.props;
 
-		console.log(`${this.state.currentPersonIndex}, ${peopleCount}`)
-
-		if (this.state.currentPersonIndex >= peopleCount) {
+		if (this.state.currentPersonIndex + 1 >= peopleCount) {
 			fetchRandomPeople();
 		}
 	});

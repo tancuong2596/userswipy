@@ -22,9 +22,13 @@ class Deck extends Component {
 		currentIndex: 0,
 		showNextPerson: () => {
 		},
+		discardPerson: () => {
+		},
+		addPersonToFavorite: () => {
+		},
 	};
 
-	renderCard(person = {}) {
+	renderCard = (person = {}, index) => {
 		const {
 			discardPerson,
 			addPersonToFavorite,
@@ -37,6 +41,7 @@ class Deck extends Component {
 
 		return (
 			<SwipableCard
+				key={index}
 				styles={styles.card}
 				onSwipeLeft={discardPerson}
 				onSwipeRight={addPersonToFavorite}
@@ -55,12 +60,12 @@ class Deck extends Component {
 				</View>
 			</SwipableCard>
 		);
-	}
+	};
 
 	render() {
 		const {people} = this.props;
 
-		return people.map((person) => this.renderCard(person))
+		return people.map(this.renderCard);
 	}
 }
 
