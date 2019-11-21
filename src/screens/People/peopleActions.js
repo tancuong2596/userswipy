@@ -1,26 +1,26 @@
 import {createAction, createAsyncAction} from "src/utils/api";
 import peopleActionTypes from "src/redux/actionTypes/peopleActionTypes";
 
-const fetchRandomPeople = () => createAsyncAction({
+const fetchRandomPeople = (size = 5) => createAsyncAction({
 	type: peopleActionTypes.FETCH_RANDOM_PEOPLE,
 	payload: {
 		params: {
-			results: 5
+			results: size
 		}
 	},
 });
 
-const markPersonAsShown = (personId = null) => createAction({
+const markPersonAsShown = (person = null) => createAction({
 	type: peopleActionTypes.MARK_PERSON_AS_SHOWN,
 	payload: {
-		personId
+		person
 	}
 });
 
-const addPersonToFavorite = (personId = null) => createAction({
+const addPersonToFavorite = (person = null) => createAction({
 	type: peopleActionTypes.ADD_PERSON_TO_FAVORITE,
 	payload: {
-		personId
+		person
 	}
 });
 

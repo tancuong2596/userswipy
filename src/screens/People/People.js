@@ -5,20 +5,27 @@ import PropTypes from "prop-types";
 
 import styles from "./styles";
 import commonStyles from "src/styles/commonStyles";
-import {fetchRandomPeople} from "src/screens/People/peopleActions";
+import {addPersonToFavorite, fetchRandomPeople, markPersonAsShown} from "src/screens/People/peopleActions";
 import Deck from "src/screens/People/components/Deck/Deck";
+import {getPersonId} from "src/utils/misc";
 
 class People extends Component {
 	static propTypes = {
 		people: PropTypes.array,
 		peopleCount: PropTypes.number,
 		fetchingPeople: PropTypes.bool,
+		addPersonToFavorite: PropTypes.func,
+		markPersonAsShown: PropTypes.func,
 	};
 
 	static defaultProps = {
 		people: [],
 		peopleCount: 0,
 		fetchingPeople: false,
+		addPersonToFavorite: () => {
+		},
+		markPersonAsShown: () => {
+		},
 	};
 
 	constructor(props) {
@@ -40,10 +47,18 @@ class People extends Component {
 	};
 
 	discardPerson = () => {
+		const {markPersonAsShown, people} = this.props;
+		const {currentPersonIndex} = this.state;
+
+		markPersonAsShown(people[currentPersonIndex]);
 		this.showNextPerson();
 	};
 
 	addPersonToFavorite = () => {
+		const {addPersonToFavorite, people} = this.props;
+		const {currentPersonIndex} = this.state;
+
+		addPersonToFavorite(people[currentPersonIndex]);
 		this.showNextPerson();
 	};
 
@@ -87,4 +102,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
 	fetchRandomPeople,
+	addPersonToFavorite,
+	markPersonAsShown
 })(People);

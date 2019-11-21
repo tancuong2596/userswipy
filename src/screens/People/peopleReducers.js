@@ -6,21 +6,19 @@ const initialState = {
 	people: {
 		data: [],
 		fetching: false
-	}
+	},
+	shownPeopleId: {},
+	favoritePeople: [],
 };
 
 const combinePeopleData  = (newData = [], oldData = []) => {
-	const existingIds = new Set(
-		oldData.map(getPersonId)
-	);
-
 	return [
 		...oldData,
-		...newData.filter(person => !existingIds.has(getPersonId(person))),
+		...newData
 	];
 };
 
-const peopleReducers = (state = initialState, {type, payload} = {}) => {
+const peopleReducers = (state = initialState, {type, payload = {}} = {}) => {
 	switch (type) {
 		case toRequest(peopleActionTypes.FETCH_RANDOM_PEOPLE):
 			return {
@@ -46,6 +44,40 @@ const peopleReducers = (state = initialState, {type, payload} = {}) => {
 					fetching: false
 				}
 			};
+		case peopleActionTypes.ADD_PERSON_TO_FAVORITE: {
+			const {person} = payload;
+
+			if (person === null) {
+				return state;
+			}
+
+			return {
+				...state,
+				favoritePeople: [
+					...state.favoritePeople,
+					person
+				],
+				shownPeopleId: {
+					...state.shownPeopleId,
+					[getPersonId(person)]: true
+				}
+			};
+		}
+		case peopleActionTypes.MARK_PERSON_AS_SHOWN: {
+			const {person} = payload;
+
+			if (person === null) {
+				return state;
+			}
+
+			return {
+				...state,
+				shownPeopleId: {
+					...state.shownPeopleId,
+					[getPersonId(person)]: true
+				}
+			};
+		}
 		default:
 			return state;
 	}

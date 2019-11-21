@@ -60,17 +60,12 @@ const createAsyncAction = ({type, payload = {}, onSuccess, onFailure} = {}) => a
 };
 
 const createAction = ({type, payload, onSuccess}) => dispatch => {
-	dispatch({
-		type: toRequest(type),
-		payload
-	});
-
 	if (typeof onSuccess === "function") {
 		onSuccess(dispatch, payload);
 	}
 
 	return dispatch({
-		type: toSuccess(type),
+		type: type,
 		payload
 	});
 };

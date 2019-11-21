@@ -53,7 +53,7 @@ class Deck extends Component {
 					<Text style={styles.greetingLabel}>
 						Hi, My name is
 					</Text>
-					<Text numberOfLines={4} style={styles.personNameLabel}>
+					<Text style={styles.personNameLabel} numberOfLines={2}>
 						{constructFullName(name)}
 					</Text>
 					<ToolBar onButtonPressed={this.toolBarButtonPressed}/>
