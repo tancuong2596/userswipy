@@ -12,7 +12,6 @@ class Deck extends Component {
 	static propTypes = {
 		people: PropTypes.array,
 		currentIndex: PropTypes.number,
-		showNextPerson: PropTypes.func,
 		discardPerson: PropTypes.func,
 		addPersonToFavorite: PropTypes.func,
 	};
@@ -20,8 +19,6 @@ class Deck extends Component {
 	static defaultProps = {
 		people: [],
 		currentIndex: 0,
-		showNextPerson: () => {
-		},
 		discardPerson: () => {
 		},
 		addPersonToFavorite: () => {
@@ -43,8 +40,8 @@ class Deck extends Component {
 			<SwipableCard
 				key={index}
 				styles={styles.card}
-				onSwipeLeft={discardPerson}
-				onSwipeRight={addPersonToFavorite}
+				onSwipeLeft={discardPerson.bind(this, person)}
+				onSwipeRight={addPersonToFavorite.bind(this, person)}
 			>
 				<View style={styles.upperCard}>
 					<Avatar imageUrl={picture.large}/>

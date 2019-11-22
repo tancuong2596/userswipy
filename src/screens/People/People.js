@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {View, Image, Text, TouchableOpacity} from "react-native";
+import {View, Image} from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./styles";
@@ -55,19 +55,17 @@ class People extends Component {
 		//showMessage("Alert", "Button clicked");
 	};
 
-	discardPerson = () => {
-		const {markPersonAsShown, people} = this.props;
-		const {currentPersonIndex} = this.state;
+	discardPerson = (person) => {
+		const {markPersonAsShown} = this.props;
 
-		markPersonAsShown(people[currentPersonIndex]);
+		markPersonAsShown(person);
 		this.showNextPerson();
 	};
 
-	addPersonToFavorite = () => {
-		const {addPersonToFavorite, people} = this.props;
-		const {currentPersonIndex} = this.state;
+	addPersonToFavorite = (person) => {
+		const {addPersonToFavorite} = this.props;
 
-		addPersonToFavorite(people[currentPersonIndex]);
+		addPersonToFavorite(person);
 		this.showNextPerson();
 	};
 
@@ -79,7 +77,7 @@ class People extends Component {
 			fetchRandomPeople,
 		} = this.props;
 
-		if (this.state.currentPersonIndex + 1 >= peopleCount) {
+		if (this.state.currentPersonIndex >= peopleCount) {
 			fetchRandomPeople();
 		}
 	});
