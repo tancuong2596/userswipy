@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import styles from "./styles";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
-const MARGIN_WIDTH = SCREEN_WIDTH / 2;
+const MARGIN_WIDTH = SCREEN_WIDTH / 1.7;
 
 class SwipableCard extends Component {
 	static propTypes = {
