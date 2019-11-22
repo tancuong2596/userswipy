@@ -14,51 +14,50 @@ import calenderSelected from "src/assets/icons/calendarSelected.png";
 import mapSelected from "src/assets/icons/mapSelected.png";
 import phoneSelected from "src/assets/icons/phoneSelected.png";
 import ToolBarButton from "src/components/ToolBarButton/ToolBarButton";
+import {userInfo} from "src/constants/constants";
 
 const buttons = [
 	{
 		icon: person,
-		selectedIcon: personSelected
+		selectedIcon: personSelected,
+		value: userInfo.NAME,
 	},
 	{
 		icon: mail,
-		selectedIcon: mailSelected
+		selectedIcon: mailSelected,
+		value: userInfo.MAIL,
 	},
 	{
 		icon: calender,
-		selectedIcon: calenderSelected
+		selectedIcon: calenderSelected,
+		value: userInfo.BIRTHDAY,
 	},
 	{
 		icon: map,
-		selectedIcon: mapSelected
+		selectedIcon: mapSelected,
+		value: userInfo.ADDRESS,
 	},
 	{
 		icon: phone,
-		selectedIcon: phoneSelected
+		selectedIcon: phoneSelected,
+		value: userInfo.PHONE,
 	}
 ];
 
 class ToolBar extends Component {
 	static propTypes = {
+		isButtonSelected: PropTypes.array,
 		onButtonPressed: PropTypes.func
 	};
 
 	static defaultProps = {
+		isButtonSelected: [],
 		onButtonPressed: () => {
 		}
 	};
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			isButtonSelected: buttons.map(_ => false)
-		}
-	}
-
 	toggleButtonAt = (selectedIndex) => {
-		this.setState({
-			isButtonSelected: buttons.map((_, index) => index === selectedIndex)
-		}, this.props.onButtonPressed);
+		this.props.onButtonPressed(buttons[selectedIndex].value, selectedIndex);
 	};
 
 	render() {
@@ -69,7 +68,7 @@ class ToolBar extends Component {
 						(button, index) => <ToolBarButton
 							key={index}
 							{...button}
-							selected={this.state.isButtonSelected[index]}
+							selected={this.props.isButtonSelected[index]}
 							onPress={this.toggleButtonAt.bind(this, index)}
 						/>
 					)}

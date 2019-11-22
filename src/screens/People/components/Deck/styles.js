@@ -41,7 +41,9 @@ const styles = StyleSheet.create({
 	},
 	personNameLabel: {
 		color: "#2c2e31",
-		fontSize: 34,
+		fontSize: 30,
+		width: "100%",
+		minHeight: 86,
 		margin: 5,
 		textTransform: "capitalize",
 		textAlign: "center",

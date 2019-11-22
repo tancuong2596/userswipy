@@ -51,10 +51,6 @@ class People extends Component {
 		}
 	}
 
-	toolBarButtonPressed = () => {
-		//showMessage("Alert", "Button clicked");
-	};
-
 	addPersonToFavorite = (person) => {
 		const {
 			addPersonToFavorite,

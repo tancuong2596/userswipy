@@ -13,7 +13,7 @@ class ToolBarButton extends Component {
 
 	static defaultProps = {
 		onPress: () => {
-		},z
+		},
 		selected: false,
 	};
 
