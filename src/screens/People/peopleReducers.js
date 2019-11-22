@@ -64,7 +64,7 @@ const peopleReducers = (state = initialState, {type, payload = {}} = {}) => {
 			};
 		}
 		case peopleActionTypes.MARK_PERSON_AS_SHOWN: {
-			const {person} = payload;
+			const {person} = payload;f
 
 			if (person === null) {
 				return state;

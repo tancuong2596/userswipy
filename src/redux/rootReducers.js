@@ -1,4 +1,3 @@
-import {persistStore} from "redux-persist";
 import {combineReducers} from "redux";
 
 import peopleReducers from "src/screens/People/peopleReducers";

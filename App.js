@@ -9,26 +9,17 @@
 import "react-native-gesture-handler";
 import React from "react";
 import {Provider} from "react-redux";
-import {createAppContainer} from "react-navigation";
-import {createBottomTabNavigator} from "react-navigation-tabs";
+import { PersistGate } from "redux-persist/integration/react";
 
-import People from "src/screens/People/People";
-import Favorite from "src/screens/Favorite/Favorite";
-import store from "src/redux/store";
-
-const AppNavigator = createBottomTabNavigator({
-	People: People,
-	Favorite: Favorite
-}, {
-	initialRouteName: "People"
-});
-
-const Root = createAppContainer(AppNavigator);
+import store, {persistor} from "src/redux/store";
+import Root from "./Root";
 
 const App: () => React$Node = () => {
 	return (
 		<Provider store={store}>
-			<Root/>
+			<PersistGate loading={null} persistor={persistor}>
+				<Root/>
+			</PersistGate>
 		</Provider>
 	);
 };
