@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Animated, ScrollView, Image, View, TouchableHighlight} from "react-native";
+import {Animated, ScrollView, Image, View, TouchableOpacity} from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./styles";
@@ -49,7 +49,7 @@ class ToolBarButton extends Component {
 
 	render() {
 		return (
-			<TouchableHighlight underlayColor="transparent" onPress={this.props.onPress}>
+			<TouchableOpacity onPress={this.props.onPress}>
 				<ScrollView
 					ref={ref => this.ref = ref}
 					style={styles.toolBarButton}
@@ -66,7 +66,7 @@ class ToolBarButton extends Component {
 						style={styles.toolBarButtonIcon}
 					/>
 				</ScrollView>
-			</TouchableHighlight>
+			</TouchableOpacity>
 		);
 	}
 }

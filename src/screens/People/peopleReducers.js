@@ -1,21 +1,12 @@
 import {toFailure, toRequest, toSuccess} from "src/utils/api";
 import peopleActionTypes from "src/redux/actionTypes/peopleActionTypes";
-import {getPersonId} from "src/utils/misc";
 
 const initialState = {
 	people: {
-		data: [],
+		showingData: [],
 		fetching: false
 	},
-	shownPeopleId: {},
 	favoritePeople: [],
-};
-
-const combinePeopleData  = (newData = [], oldData = []) => {
-	return [
-		...oldData,
-		...newData
-	];
 };
 
 const peopleReducers = (state = initialState, {type, payload = {}} = {}) => {
@@ -32,8 +23,12 @@ const peopleReducers = (state = initialState, {type, payload = {}} = {}) => {
 			return {
 				...state,
 				people: {
+					...state.people,
 					fetching: false,
-					data: combinePeopleData(payload.results, state.people.data)
+					showingData: [
+						...state.people.showingData,
+						...payload.results
+					],
 				}
 			};
 		case toFailure(peopleActionTypes.FETCH_RANDOM_PEOPLE):
@@ -44,6 +39,18 @@ const peopleReducers = (state = initialState, {type, payload = {}} = {}) => {
 					fetching: false
 				}
 			};
+		case peopleActionTypes.SHOW_NEXT_PEOPLE: {
+			const newShowingData = [...state.people.showingData];
+			newShowingData.shift();
+
+			return {
+				...state,
+				people: {
+					...state.people,
+					showingData: newShowingData
+				}
+			};
+		}
 		case peopleActionTypes.ADD_PERSON_TO_FAVORITE: {
 			const {person} = payload;
 
@@ -56,26 +63,7 @@ const peopleReducers = (state = initialState, {type, payload = {}} = {}) => {
 				favoritePeople: [
 					...state.favoritePeople,
 					person
-				],
-				shownPeopleId: {
-					...state.shownPeopleId,
-					[getPersonId(person)]: true
-				}
-			};
-		}
-		case peopleActionTypes.MARK_PERSON_AS_SHOWN: {
-			const {person} = payload;f
-
-			if (person === null) {
-				return state;
-			}
-
-			return {
-				...state,
-				shownPeopleId: {
-					...state.shownPeopleId,
-					[getPersonId(person)]: true
-				}
+				]
 			};
 		}
 		default:

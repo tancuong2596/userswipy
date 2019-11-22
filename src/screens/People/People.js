@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import styles from "./styles";
 import commonStyles from "src/styles/commonStyles";
-import {addPersonToFavorite, fetchRandomPeople, markPersonAsShown} from "src/screens/People/peopleActions";
+import {addPersonToFavorite, fetchRandomPeople, showNextPeople} from "src/screens/People/peopleActions";
 import Deck from "src/screens/People/components/Deck/Deck";
 import person from "src/assets/icons/person.png";
 import personSelected from "src/assets/icons/personSelected.png";
@@ -24,7 +24,8 @@ class People extends Component {
 		peopleCount: PropTypes.number,
 		fetchingPeople: PropTypes.bool,
 		addPersonToFavorite: PropTypes.func,
-		markPersonAsShown: PropTypes.func,
+		showNextPeople: PropTypes.func,
+		fetchRandomPeople: PropTypes.func,
 	};
 
 	static defaultProps = {
@@ -33,68 +34,51 @@ class People extends Component {
 		fetchingPeople: false,
 		addPersonToFavorite: () => {
 		},
-		markPersonAsShown: () => {
+		showNextPeople: () => {
+		},
+		fetchRandomPeople: () => {
 		},
 	};
 
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			currentPersonIndex: 0,
-		};
-	}
-
 	componentDidMount() {
-		const {fetchRandomPeople} = this.props;
+		const {
+			people,
+			fetchRandomPeople
+		} = this.props;
 
-		fetchRandomPeople();
+		if (people.length === 0) {
+			fetchRandomPeople();
+		}
 	}
 
 	toolBarButtonPressed = () => {
 		//showMessage("Alert", "Button clicked");
 	};
 
-	discardPerson = (person) => {
-		const {markPersonAsShown} = this.props;
-
-		markPersonAsShown(person);
-		this.showNextPerson();
-	};
-
 	addPersonToFavorite = (person) => {
-		const {addPersonToFavorite} = this.props;
-
-		addPersonToFavorite(person);
-		this.showNextPerson();
-	};
-
-	showNextPerson = () => this.setState({
-		currentPersonIndex: this.state.currentPersonIndex + 1,
-	}, () => {
 		const {
-			peopleCount,
-			fetchRandomPeople,
+			addPersonToFavorite,
+			showNextPeople
 		} = this.props;
 
-		if (this.state.currentPersonIndex >= peopleCount) {
-			fetchRandomPeople();
-		}
-	});
+		addPersonToFavorite(person);
+		showNextPeople();
+	};
 
 	render() {
-		const {currentPersonIndex} = this.state;
-		const {people = []} = this.props;
+		const {
+			people = [],
+			showNextPeople,
+		} = this.props;
+
 		const {matchParent, centerChildren} = commonStyles;
 
 		return (
 			<View style={[matchParent, centerChildren, styles.people]}>
 				<Deck
 					people={people}
-					currendIndex={currentPersonIndex}
-					showNextPerson={this.showNextPerson}
 					addPersonToFavorite={this.addPersonToFavorite}
-					discardPerson={this.discardPerson}
+					discardPerson={showNextPeople}
 				/>
 			</View>
 		);
@@ -102,13 +86,13 @@ class People extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	people: state.people.people.data,
-	peopleCount: state.people.people.data.length,
+	people: state.people.people.showingData,
+	peopleCount: state.people.people.showingData.length,
 	fetchingPeople: state.people.people.fetching,
 });
 
 export default connect(mapStateToProps, {
 	fetchRandomPeople,
 	addPersonToFavorite,
-	markPersonAsShown,
+	showNextPeople,
 })(People);

@@ -11,14 +11,12 @@ import ToolBar from "src/components/ToolBar/ToolBar";
 class Deck extends Component {
 	static propTypes = {
 		people: PropTypes.array,
-		currentIndex: PropTypes.number,
 		discardPerson: PropTypes.func,
 		addPersonToFavorite: PropTypes.func,
 	};
 
 	static defaultProps = {
 		people: [],
-		currentIndex: 0,
 		discardPerson: () => {
 		},
 		addPersonToFavorite: () => {
@@ -40,7 +38,7 @@ class Deck extends Component {
 			<SwipableCard
 				key={index}
 				styles={styles.card}
-				onSwipeLeft={discardPerson.bind(this, person)}
+				onSwipeLeft={discardPerson}
 				onSwipeRight={addPersonToFavorite.bind(this, person)}
 			>
 				<View style={styles.upperCard}>
@@ -59,10 +57,10 @@ class Deck extends Component {
 		);
 	};
 
-	render() {
-		const {people} = this.props;
 
-		return people.map(this.renderCard);
+	render() {
+		const showingData = [...this.props.people];
+		return showingData.reverse().map(this.renderCard);
 	}
 }
 
