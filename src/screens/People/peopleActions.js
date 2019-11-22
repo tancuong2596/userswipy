@@ -1,5 +1,6 @@
 import {createAction, createAsyncAction} from "src/utils/api";
 import peopleActionTypes from "src/redux/actionTypes/peopleActionTypes";
+import showMessage from "src/utils/showMessage";
 
 const fetchRandomPeople = (size = 8) => createAsyncAction({
 	type: peopleActionTypes.FETCH_RANDOM_PEOPLE,
@@ -8,6 +9,22 @@ const fetchRandomPeople = (size = 8) => createAsyncAction({
 			results: size
 		}
 	},
+	onFailure: dispatch => {
+		showMessage(
+			"Sorry",
+			"Cannot load list of people. Click 'retry' to try again.",
+			[
+				{
+					text: 'Close',
+					style: 'cancel',
+				},
+				{
+					text: 'Retry',
+					onPress: () => dispatch(fetchRandomPeople()),
+				},
+			]
+		)
+	}
 });
 
 const addPersonToFavorite = (person = null) => createAction({
@@ -24,7 +41,7 @@ const isShowingDataEmpty = (getState) => {
 		// skip
 	}
 
-	return false;
+	return true;
 };
 
 const showNextPeople = () => (dispatch, getState) => {

@@ -1,17 +1,20 @@
 import {View, Text, ToastAndroid, Alert, Platform} from "react-native";
 
-const showMessage = (title, message) => {
+const defaultButtons = [
+	{
+		text: 'Close',
+		onPress: () => console.log('Cancel Pressed'),
+		style: 'cancel',
+	},
+];
+
+const showMessage = (title, message, buttons = defaultButtons) => {
 	Alert.alert(
 		title,
 		message,
-		[
-			{
-				text: 'Close',
-				onPress: () => console.log('Cancel Pressed'),
-				style: 'cancel',
-			},
-		],
+		buttons,
 		{cancelable: false},
-	);};
+	);
+};
 
 export default showMessage;
