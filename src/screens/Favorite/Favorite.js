@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {View, Image, FlatList, Text} from "react-native";
+import {View, Image, FlatList, Text, SafeAreaView} from "react-native";
 import PropTypes from "prop-types";
 
 import styles from "./styles";
@@ -48,11 +48,13 @@ class Favorite extends Component {
 
 	render() {
 		return (
-			<FlatList
-				data={this.props.people}
-				renderItem={this.renderItem}
-				keyExtractor={(_, index) => index.toString()}
-			/>
+			<SafeAreaView>
+				<FlatList
+					data={this.props.people}
+					renderItem={this.renderItem}
+					keyExtractor={(_, index) => index.toString()}
+				/>
+			</SafeAreaView>
 		);
 	}
 }
